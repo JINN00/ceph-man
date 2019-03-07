@@ -55,4 +55,18 @@ function listobject($s3Client, $bucket_name){
 	}
 }
 
+function createobject($s3Client, $bucket_name, $file_path){
+	$key = basename($file_path);
+	try{
+		$result = $s3Client->putObject([
+		'Bucket'     => $bucket_name,
+		'Key'        => $key,
+		'SourceFile' => $file_path,
+		'ACL'        => 'private',
+	]);
+	} catch (S3Exception $e) {
+		echo $e->getMessage() . "\n";
+	}
+}
+
 ?>
