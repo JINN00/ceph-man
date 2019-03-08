@@ -86,14 +86,25 @@ function deleteobject($s3Client, $bucket_name, $file_path){
         }
 }
 
-function getobject($s3Client, $bucket_name, $object){
+function getobject($s3Client, $bucket_name, $object, $dest_dir){
         $key = basename($object);
-	$s3Client->getObject(array(
-		'Bucket' => $bucket_name,
-		'Key'	 => $key,
-		'SaveAs' => "./$key"
-	));	
-	echo $key.' object downloaded'."\n";
+	if ( empty($dest_dir) ) {
+		$s3Client->getObject(array(
+			'Bucket' => $bucket_name,
+			'Key'	 => $key,
+			'SaveAs' => "./$key"
+		));	
+		echo $key.' object downloaded to working directory'."\n";
+	}
+	
+	if ( isset($dest_dir) ) {
+		$s3Client->getObject(array(
+			'Bucket' => $bucket_name,
+			'Key'	 => $key,
+			'SaveAs' => $dest_dir."/".$key
+		));	
+		echo $key.' object downloaded to '."$dest_dir"."/"."$key"."\n";
+	}
 }
 
 ?>

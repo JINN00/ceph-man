@@ -59,21 +59,22 @@ require_once "./func.php";
                 if( empty($argv[2]) || empty($argv[3])) {
                         echo "input bucket name, file name\n"; exit(0);
                 }
-
-                getobject($s3con, $argv[2], $argv[3]);
+		error_reporting(0);
+                getobject($s3con, $argv[2], $argv[3], $argv[4]);
        }
 
 
 	if($argv[1] === "help" || $argv[1] === "-h") { 
 		echo "main.php help\n";
 		echo "bucket name and rgw server's DNS record must be match\n\n";
-		echo "main.php list-bucket                          \t\tprint bucket list\n";
-		echo "main.php create-bucket bucket-name            \t\tcreate bucket\n";
-		echo "main.php delete-bucket bucket-name            \t\tdelete bucket\n";
-		echo "main.php list-object bucket-name              \t\tprint object in bucket\n";
-		echo "main.php create-object bucket-name file_path  \t\tcreate object in bucket\n";
-		echo "main.php delete-object bucket-name file_path  \t\tdelete object in bucket\n";
-		echo "main.php get-object bucket-name file_name     \t\tdownload file in bucket to working directory\n";
+		echo "main.php list-bucket                                  \t\tprint bucket list\n";
+		echo "main.php create-bucket bucket-name                    \t\tcreate bucket\n";
+		echo "main.php delete-bucket bucket-name                    \t\tdelete bucket\n";
+		echo "main.php list-object bucket-name                      \t\tprint object in bucket\n";
+		echo "main.php create-object bucket-name file_path          \t\tcreate object in bucket\n";
+		echo "main.php delete-object bucket-name file_path          \t\tdelete object in bucket\n";
+		echo "main.php get-object bucket-name file_name             \t\tdownload file in bucket to working directory\n";
+		echo "main.php get-object bucket-name file_name dest_dir    \t\tdownload file in bucket to destination directory\n";
 		
 	}
 ?>
