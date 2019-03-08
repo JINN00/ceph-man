@@ -18,8 +18,8 @@ function listbucket($s3Client){
 	$buckets = $s3Client->listBuckets();
 	try {
 	
-		echo $buckets['Owner']['ID']."\t";
-		echo $buckets['Owner']['DisplayName']."\n";
+		echo "ID: ".$buckets['Owner']['ID']."\t";
+		echo "DisplayName: ".$buckets['Owner']['DisplayName']."\n";
 		foreach ($buckets['Buckets'] as $bucket){
 			echo "{$bucket['Name']}\t${bucket['CreationDate']}.\n";
 		}		
@@ -44,6 +44,8 @@ function createbucket($s3Client, $bucket_name){
 
 function deletebucket($s3Client, $bucket_name){
 	$s3Client->deleteBucket(array('Bucket' => $bucket_name));
+	echo $bucket_name.' Bucket deleted'."\n";
+
 }
 
 function listobject($s3Client, $bucket_name){
@@ -63,10 +65,25 @@ function createobject($s3Client, $bucket_name, $file_path){
 		'Key'        => $key,
 		'SourceFile' => $file_path,
 		'ACL'        => 'private',
-	]);
+		]);
+	        echo $key.' object created'."\n";
 	} catch (S3Exception $e) {
 		echo $e->getMessage() . "\n";
 	}
+}
+
+
+function deleteobject($s3Client, $bucket_name, $file_path){
+        $key = basename($file_path);
+        try{
+		$s3Client->deleteObject(array(
+			'Bucket' => $bucket_name,
+			'Key'    => $key,
+		));
+	        echo $key.' object deleted'."\n";
+        } catch (S3Exception $e) {
+                echo $e->getMessage() . "\n";
+        }
 }
 
 ?>
