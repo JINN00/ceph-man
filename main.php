@@ -65,15 +65,15 @@ require_once "./func.php";
 
 
 	if($argv[1] === "help" || $argv[1] === "-h") { 
-		echo "main.php help\n\n";
-		echo "main.php list-bucket                          \t\tprint bucket list for configured user\n";
-		echo "main.php create-bucket bucket-name            \t\tcreate bucket for configured user\n";
-		echo "                                              \t\tbucket name and rgw server's record must be match\n";
-		echo "main.php delete-bucket bucket-name            \t\tdelete bucket for configured user\n";
-		echo "main.php list-object bucket-name              \t\tprint object in bucket for configured user\n";
-		echo "main.php create-object bucket-name file_path  \t\tcreate object in bucket for configured user\n";
-		echo "main.php delete-object bucket-name file_path  \t\tdelete object in bucket for configured user\n";
-		echo "main.php get-object bucket-name file_name     \t\tdownload object in bucket for configured user\n";
+		echo "main.php help\n";
+		echo "bucket name and rgw server's DNS record must be match\n\n";
+		echo "main.php list-bucket                          \t\tprint bucket list\n";
+		echo "main.php create-bucket bucket-name            \t\tcreate bucket\n";
+		echo "main.php delete-bucket bucket-name            \t\tdelete bucket\n";
+		echo "main.php list-object bucket-name              \t\tprint object in bucket\n";
+		echo "main.php create-object bucket-name file_path  \t\tcreate object in bucket\n";
+		echo "main.php delete-object bucket-name file_path  \t\tdelete object in bucket\n";
+		echo "main.php get-object bucket-name file_name     \t\tdownload file in bucket to working directory\n";
 		
 	}
 ?>

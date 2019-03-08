@@ -93,6 +93,7 @@ function getobject($s3Client, $bucket_name, $object){
 		'Key'	 => $key,
 		'SaveAs' => "./$key"
 	));	
+	echo $key.' object downloaded'."\n";
 }
 
 ?>
