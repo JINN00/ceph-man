@@ -5,7 +5,7 @@ require_once "./func.php";
 	if($argc == 1) { echo "input any option\n"; exit(0); }
 
 	if($argc != 1) { 
-                if( preg_match("/create-bucket|delete-bucket|list-bucket|list-object|create-object|delete-object|-h|help/",$argv[1]) == false ) {
+                if( preg_match("/create-bucket|delete-bucket|list-bucket|list-object|create-object|delete-object|get-object|-h|help/",$argv[1]) == false ) {
 			echo "Unkown options!\n";
                         exec('php ./main.php help',$output,$error);
 			foreach($output as $i) { echo $i."\n"; }
@@ -54,6 +54,15 @@ require_once "./func.php";
 		deleteobject($s3con, $argv[2], $argv[3]);
 		listobject($s3con, $argv[2]);
 	}
+	
+        if($argv[1] === "get-object"){
+                if( empty($argv[2]) || empty($argv[3])) {
+                        echo "input bucket name, file name\n"; exit(0);
+                }
+
+                getobject($s3con, $argv[2], $argv[3]);
+       }
+
 
 	if($argv[1] === "help" || $argv[1] === "-h") { 
 		echo "main.php help\n\n";
@@ -64,6 +73,7 @@ require_once "./func.php";
 		echo "main.php list-object bucket-name              \t\tprint object in bucket for configured user\n";
 		echo "main.php create-object bucket-name file_path  \t\tcreate object in bucket for configured user\n";
 		echo "main.php delete-object bucket-name file_path  \t\tdelete object in bucket for configured user\n";
+		echo "main.php get-object bucket-name file_name     \t\tdownload object in bucket for configured user\n";
 		
 	}
 ?>

@@ -86,4 +86,15 @@ function deleteobject($s3Client, $bucket_name, $file_path){
         }
 }
 
+function getobject($s3Client, $bucket_name, $object){
+        $key = basename($object);
+	$s3Client->getObject(array(
+		'Bucket' => $bucket_name,
+		'Key'	 => $key,
+		'SaveAs' => "./$key"
+	));	
+}
+
 ?>
+
+
